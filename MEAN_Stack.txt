@@ -14,14 +14,14 @@ Node Servers:
       app.use('/hello', helloWorld) -> specific URL
       app.listen(port) -> port
       next() -> ha nincs, megáll az app
-  -Express: 
+  -Express:
     -Basic methods:
       app.set(name, value) -> set variables
       app.get(name) -> get variables
       app.locals -> variables for rendered templates
       app.use([path], callback) -> feliratkozás
       app.VERB(path, [callback], callback) -> pl. app.POST
-      app.route(path).VERB([callback...], callback) -> specific path
+      app.route(path).VERB([callback...], callback) -> app.route('/').get(function(req, res) {res.send('This is a GET request');}).post(function(req, res) {res.send('This is a POST request');});  -->specify the path, then chain several middleware
     -Request Object:
       req.query -> containing parsed query-string parameters
       req.params -> containing parsed routing params
@@ -46,4 +46,70 @@ Node Servers:
       express.static: for static files
       cookie-parser: populates the req.cookies object
       Session: support persistent sessions
-    
+    -Folder Structure
+      -Horizontal folder structure - for smaller projects
+        -app
+          -controllers
+          -models
+          -routes
+          -views
+        -config
+          -env
+          -config.js: configure Express app
+          -express.js: initailize Express app
+        -public: client side things
+          -config: AngularJS conf
+          -controller: AngularJS controllers
+          -css
+          -directives: AngularJS directives
+          -filter: AngularJS app filters
+          -img
+          -view: AngularJS app views
+          -application.js
+        -package.json - app dependencies
+        -server.js - it loads express
+      -Vertical folder structer - for larger projects
+        -core
+          -client(eq public)
+          -server(app+config)
+        -feature
+          -client(eq public)
+          -server(app+config)
+    -File-naming conventions
+      -feature.client.controller.js
+    -Configuration
+      -module.exports = require('./env/' + process.env.NODE_ENV + '.js'); config/config.js
+      -config/env development.js
+      -render:
+        -app.render() -> render the view then pass the HTML to a callback function
+        -res.render() -> render the view locally then sends the HTML as a respone
+        -app.set('views', './app/views'); -->set the path
+        -app.set('view engine', 'ejs'); -->set the engine
+        -controller+template->routing->config/express.js->server.js
+      -static files
+        -express.static()
+        -app.use(express.static('./public')); <- set the path
+      -session
+        -express-session - sessionSecret
+          -different enviroments
+        -in express.js : app.use(session({
+                          saveUninitialized: true,
+                          resave: true,
+                          secret: config.sessionSecret
+                        }));
+        -in controller: if (req.session.lastVisit) {
+                              console.log(req.session.lastVisit);
+                            }
+                            req.session.lastVisit = new Date();
+MongoDB
+  -NoSQL, BSON (binary json) schemaless
+  -relational database vs document-based database
+  -"string": "type"
+     key   :  value
+  -_id: primary key
+  -"ad-hoc" queries - like relational databases dynamic query languange
+
+
+
+
+
