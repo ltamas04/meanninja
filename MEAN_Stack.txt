@@ -1,0 +1,49 @@
+Package JSON:
+	{
+		"name" : "MEAN",
+		"version" : "0.0.3",
+		"dependencies" : {
+		"express" : "~4.8.8"
+    }
+}
+
+Node Servers:
+  -Connect:
+    -Basic Methods
+      app.use() -> subscribe to a request with callback
+      app.use('/hello', helloWorld) -> specific URL
+      app.listen(port) -> port
+      next() -> ha nincs, megáll az app
+  -Express: 
+    -Basic methods:
+      app.set(name, value) -> set variables
+      app.get(name) -> get variables
+      app.locals -> variables for rendered templates
+      app.use([path], callback) -> feliratkozás
+      app.VERB(path, [callback], callback) -> pl. app.POST
+      app.route(path).VERB([callback...], callback) -> specific path
+    -Request Object:
+      req.query -> containing parsed query-string parameters
+      req.params -> containing parsed routing params
+      req.body -> retrieve requestBody
+      req.param(name) -> get one param from params
+      req.path -> retrieve request path
+      req.host -> retrieve host name
+      req.ip -> retrieve remove IP
+      req.cookies -> retrieve cookies
+    -Response Object:
+      res.status(code): set response status code
+      res.set(field, [value]): set response HTTP header
+      res.cookie(name, value, [options]): set response cookie
+      res.redirect([status], url): redirect
+      res.send([body|status], [body]): non-streaming respose, lot of backgorund work
+      res.json([body|status], [body]): equals with send, but JSON
+      res.render(view, [locals], callback): render a view and send an HTML response
+    -External middleware
+      body-parser: parse the request body
+      method-override: support HTTP verb, where the client doesnt support it
+      Compression: compress the response data
+      express.static: for static files
+      cookie-parser: populates the req.cookies object
+      Session: support persistent sessions
+    
