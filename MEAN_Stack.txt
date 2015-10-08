@@ -108,8 +108,51 @@ MongoDB
      key   :  value
   -_id: primary key
   -"ad-hoc" queries - like relational databases dynamic query languange
-
-
-
-
+  -Methods (CRUD)
+    -show collections
+    -Delete
+      -db.posts.drop() - delete with indexs
+      -db.posts.remove()  -delete without indexs
+      -db.posts.remove({ "user": "alice" }, true) - only deletes the first match
+    -Create
+      -db.posts.insert({"title":"First Post", "user": "bob"})
+      -db.posts.update() - if user no match
+        > db.posts.update({
+            "user": "alice"
+          }, {
+            "title": "Second Post",
+            "user": "alice"
+          }, {
+            upsert: true,
+            multi: true
+          })
+      -db.posts.save() - if no _id or no match ->new doc
+        -db.posts.save({"title":"Second Post", "user": "alice"})
+    -Read
+      -db.posts.find({})
+      -db.posts.find({ "user": "alice" })
+      -Queries:
+        -db.posts.find({ "user": { $in: ["alice", "bob"] } }) - alice or bob
+        -http://docs.mongodb.org/manual/reference/operator/query/#query-selectors
+      -AND: > db.posts.find({ "user": "alice", "commentsCount": { $gt: 10 }  }) -add another condition with ,
+      -OR: > db.posts.find( { $or: [{ "user": "alice" }, { "user": "bob" }] })
+    -Update
+      -save with id
+      -update(criteria, content, options)
+Mongoose
+  -Node.js ODM modul
+  -connect:
+    1)env/development.js - db: 'mongodb://localhost/mean-book',
+    2)config/mongoose.js - var db = mongoose.connect(config.db); return db;
+    3)serverjs - require('./config/mongoose') +  var db = mongoose();
+  -Schema
+    -require mongoose.Schema
+    -new Schema({}) - define new Schema
+    -mongoose.model(SchemaName, Schema)
+    -require in mongoose.js
+    -require('mongoose').model('User') - error handling and trying to save it = user.save success-> res.json(user)
+    -GET: User.find({criteria},handler)..res.json(users)
+    -findOne({criteria}, handler)
+    -update: put
+    -delete:delete
 
