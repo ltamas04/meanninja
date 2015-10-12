@@ -1,3 +1,4 @@
-module.exports = function() {
-	db: 'mongodb://localhost/mean-book'
+module.exports =  {
+	db: 'mongodb://localhost/mean-book',
+	sessionSecret: 'developmentSessionSecret'
 }

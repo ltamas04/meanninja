@@ -1,10 +1,10 @@
-var mongoose = require('mongoose'),
-  config = require('./config');
+var config = require('./config'),
+	mongoose = require('mongoose');
 
 module.exports = function() {
-  var db = mongoose.connect(config.db);
+	var db = mongoose.connect(config.db);
 
-  //schema need
+	require('../app/models/user.server.model');
 
-  return db;
+	return db;
 }

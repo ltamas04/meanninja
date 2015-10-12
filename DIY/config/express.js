@@ -1,10 +1,13 @@
 var express = require('express'),
-  config = require('./config');
+	config = require('./config'),
+	bodyParser  = require('body-parser');
 
 module.exports = function() {
-  var app = express();
+	var app = express();
 
-  //routes come here
+	app.use(bodyParser.json());
 
-  return app;
+	require('../app/routes/user.server.routes.js')(app);
+
+	return app;
 }
