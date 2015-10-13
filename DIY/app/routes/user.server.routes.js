@@ -6,7 +6,7 @@ module.exports = function(app) {
 		.get(users.list);
 
 	app.route('/users/:Id')
-		.get(users.read)
+		.get(users.read);
 
 	app.param('Id', users.userByID);
 };

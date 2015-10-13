@@ -26,7 +26,7 @@ Node Servers:
       req.query -> containing parsed query-string parameters
       req.params -> containing parsed routing params
       req.body -> retrieve requestBody
-      req.param(name) -> get one param from params
+      req.param(name, callback) -> get one param from params
       req.path -> retrieve request path
       req.host -> retrieve host name
       req.ip -> retrieve remove IP
@@ -155,4 +155,51 @@ Mongoose
     -findOne({criteria}, handler)
     -update: put
     -delete:delete
+    -Advanced Schemas
+      -Default value:
+        -created: {
+            type: Date,
+            default: Date.now
+          }
+      -Modifier:
+        username: {
+          type: String,
+          trim: true
+        }
+    -Virtual Attributes
+      -UserSchema.virtual('fullName').get(function(){ return this.firstName + this.lastName});
+    -Custom Queries
+      -unique: true
+    -Index
+      -index: true
+    -Static methods:
+      UserSchema.statics.findOneByUsername
+    -Instance method:
+      UserSchema.methods.authenticate =   function(password) {
+        return this.password === password;
+      };
+    -Predefined validators
+      -required: true
+      -match: regex
+      -enum: ['admin', 'owner', 'user']
+    -Custom validator:
+        validate: [
+          function(password) {
+            return password.length >= 6;
+          },
+          'Password should be longer'
+        ]
+    -Middleware
+      -pre
+        -for validations/default values
+      -post
+        -logging ie user created || user updated
+    -DBRef
+      -ref: 'Schema'
+      -populate
+Passport.js
+  -auth
+  -strategies
+    -local
+       
 
