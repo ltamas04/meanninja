@@ -148,7 +148,7 @@ Mongoose
   -Schema
     -require mongoose.Schema
     -new Schema({}) - define new Schema
-    -mongoose.model(SchemaName, Schema)
+    -mongoose.model(SchemaName, Schema)W
     -require in mongoose.js
     -require('mongoose').model('User') - error handling and trying to save it = user.save success-> res.json(user)
     -GET: User.find({criteria},handler)..res.json(users)
@@ -202,5 +202,5 @@ Passport.js
   -strategies
     -local
     -OAuth
-
-
+Angular
+  -2way data binding

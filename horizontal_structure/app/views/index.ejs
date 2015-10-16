@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org">
   <head>
       <title><%= title %></title>
     </head>
     <body>
-      <% if ( userFullName ) { %>
-        <h2>Hello <%=userFullName%> </h2> 
+      <% if (userFullName) { %>
+        <h2>Hello <%=userFullName%> </h2>
         <a href="/signout">Sign out</a>
       <% } else { %>
         <a href="/signup">Signup</a>
@@ -13,5 +13,6 @@
     <% } %>
     <br>
       <img src="/img/logo.png" alt="Logo">
+      <script type="text/javascript" src="/lib/angular/angular.js"></script>
     </body>
 </html>
